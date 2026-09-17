@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG / JPG / WebP 怎么选：格式完全指南 · 图片格式转换</title>
+<meta name="description" content="用一张对照表讲清 PNG、JPEG、WebP、BMP 的压缩方式、透明支持、体积与兼容性差异，附 8 种场景的直接选择建议和四个常见误区。">
+<link rel="canonical" href="https://haixiansheng.github.io/image-converter/blog/png-vs-jpg-vs-webp.html" />
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>PNG / JPG / WebP 怎么选：格式完全指南</h1>
+    <p class="sub">用一张对照表讲清 PNG、JPEG、WebP、BMP 的压缩方式、透明支持、体积与兼容性差异，附 8 种场景的直接选择建议和四个常见误区。</p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · 约 1400 字 · 阅读 5 分钟</p>
+
+    <p>"这张图该存成什么格式？"是压缩、转换图片时最常见的纠结。这篇文章用一张对照表
+       讲清四种主流格式的取舍，并给出按场景直接照抄的选择建议。</p>
+
+    <h2>四种格式的本质区别</h2>
+    <p>先理解一件事：格式的差异来自两个维度——<b>压缩方式</b>和<b>是否支持透明</b>。</p>
+    <table class="compare-table">
+      <thead>
+        <tr><th>格式</th><th>压缩方式</th><th>透明</th><th>相对体积</th><th>兼容性</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>JPEG</b></td><td>有损</td><td>❌</td><td>中</td><td>⭐⭐⭐⭐⭐ 全平台</td></tr>
+        <tr><td><b>PNG</b></td><td>无损</td><td>✅</td><td>大（照片类可到 JPEG 的 5-10 倍）</td><td>⭐⭐⭐⭐⭐ 全平台</td></tr>
+        <tr><td><b>WebP</b></td><td>有损 / 无损均可</td><td>✅</td><td>小（比 JPEG 小 25-35%）</td><td>⭐⭐⭐⭐ 现代浏览器全支持</td></tr>
+        <tr><td><b>BMP</b></td><td>不压缩</td><td>❌</td><td>极大（未压缩原始数据）</td><td>⭐⭐⭐ 老系统</td></tr>
+      </tbody>
+    </table>
+
+    <h3>为什么 PNG 那么大</h3>
+    <p>PNG 是<b>无损</b>格式：它只重排数据、不丢像素，所以理论上解压后和原图完全一致。
+       代价就是压不动——照片类内容通常只能省 10-30%，甚至更少。</p>
+    <p>这也是为什么"PNG 截图转 JPG 后体积小了很多"，以及反过来
+       "JPG 转 PNG 后文件变大了好几倍"——后者不是工具的问题，是格式特性。</p>
+
+    <h3>为什么 WebP 比 JPEG 还小</h3>
+    <p>WebP 用了更新的压缩算法（基于 VP8 的帧内编码），在<b>相同肉眼画质</b>下
+       通常比 JPEG 小 25-35%。它同时支持透明通道——这是 JPEG 做不到的。</p>
+    <p>限制只在于兼容性：<b>2020 年后发布的浏览器基本都支持</b>，
+       但如果你把 WebP 发给用旧软件的人，对方可能打不开。</p>
+
+    <h2>按场景直接照抄</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>场景</th><th>选什么</th><th>理由</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>网页配图 / App 资源</td><td class="us">✅ WebP</td><td>体积最小，加载最快</td></tr>
+        <tr><td>发邮件 / 发给不确定的人</td><td class="us">✅ JPEG</td><td>兼容性最好，谁都打得开</td></tr>
+        <tr><td>截图（文字、界面）</td><td class="us">✅ PNG</td><td>文字边缘锐利，无损不糊</td></tr>
+        <tr><td>需要透明背景（图标、Logo）</td><td class="us">✅ PNG 或 WebP</td><td>JPEG 不支持透明</td></tr>
+        <tr><td>手机照片存档</td><td class="us">✅ JPEG 质量 95</td><td>体积和画质平衡</td></tr>
+        <tr><td>要反复编辑的图</td><td class="us">✅ PNG</td><td>无损，多次编辑不累积损失</td></tr>
+        <tr><td>上传到老系统（只收 JPG）</td><td class="us">✅ JPEG</td><td>系统限制</td></tr>
+        <tr><td>工业/嵌入设备</td><td class="us">✅ BMP</td><td>设备只认未压缩格式</td></tr>
+      </tbody>
+    </table>
+
+    <h2>四个常见误区</h2>
+
+    <h3>误区 1：PNG 画质比 JPEG 好</h3>
+    <p>严格说不准确。PNG 是<b>无损</b>，所以"不比原图差"；
+       JPEG 是<b>有损</b>，但质量 90 以上的 JPEG 在肉眼上基本分辨不出差别。
+       两者的差距主要在<b>体积</b>，不在可见画质。</p>
+
+    <h3>误区 2：把 JPEG 转成 PNG 能提升画质</h3>
+    <p><b>不能。</b>转格式只是换容器，不会凭空恢复已经丢失的细节。
+       JPEG 里的压缩噪点会原样保留到 PNG 里，只是文件变成好几倍大。</p>
+    <p>想让画质变好，唯一的路是<b>找回原始文件重新导出</b>，
+       或者用 AI 超分工具重建（那是"生成"细节，不是"恢复"）。</p>
+
+    <h3>误区 3：JPG 和 JPEG 是两种格式</h3>
+    <p>是<b>同一种</b>格式。JPEG 是标准名（Joint Photographic Experts Group），
+       早期 Windows 限制扩展名只能 3 个字符，所以用了 <code>.jpg</code>。两者完全通用。</p>
+
+    <h3>误区 4：有透明就用 PNG，没得选</h3>
+    <p>现在 WebP 也支持透明，而且体积小得多。
+       <b>只要目标环境支持 WebP（现代浏览器都支持），透明图优先用 WebP。</b></p>
+
+    <h2>一个容易踩的坑：PNG 转 JPEG 透明变黑</h2>
+    <p>PNG 有透明通道，JPEG 没有。转格式时透明区域必须"合成"到某个底色上。</p>
+    <p>很多工具不做这一步，结果透明区域变成<b>黑块或杂色噪点</b>。
+       正确的做法是先用指定颜色（通常白色）铺底，再把图像绘制上去。</p>
+    <p>我们的<a href="../index.html">格式转换工具</a>会自动检测透明区域，
+       提示你并让你选择填充颜色，不会出现黑块。</p>
+
+    <h2>动手试一下</h2>
+    <p>知道选什么之后，转换本身很快。我们的<a href="../index.html">图片格式转换工具</a>
+       是纯浏览器本地运行的——图片不上传任何服务器，支持 PNG / JPG / WebP / BMP 互转，
+       上传后自动识别源格式并推荐目标格式。</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">返回工具</a> ·
+      <a href="index.html">全部文章</a> ·
+      <a href="../about.html">关于我们</a> ·
+      <a href="../privacy.html">隐私政策</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG转JPG透明背景变黑？原因与解决办法 · 图片格式转换</title>
+<meta name="description" content="讲清 PNG 转 JPEG 时透明区域变黑或出现噪点的根本原因（JPEG 无 alpha 通道），并给出三种解决办法与转前检查清单。">
+<link rel="canonical" href="https://haixiansheng.github.io/image-converter/blog/png-to-jpg-transparency-black.html" />
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>PNG转JPG透明背景变黑？原因与解决办法</h1>
+    <p class="sub">讲清 PNG 转 JPEG 时透明区域变黑或出现噪点的根本原因（JPEG 无 alpha 通道），并给出三种解决办法与转前检查清单。</p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · 约 1200 字 · 阅读 4 分钟</p>
+
+    <p>很多人第一次把带透明背景的 PNG 转成 JPG 时都会遇到同一个问题：
+       <b>原本透明的地方变成了黑色</b>（或者白色、灰色、彩色噪点）。
+       这不是你的图片坏了，也不是工具"坏"了——这是一个格式层面的必然问题。
+       这篇文章讲清原因和三种解决办法。</p>
+
+    <h2>一、根本原因：JPEG 没有透明通道</h2>
+    <p>透明是怎么实现的？在 PNG 和 WebP 里，每个像素除了红、绿、蓝三个值，
+       还额外存了一个 <b>alpha 值</b>（0 = 完全透明，255 = 完全不透明）。</p>
+    <p><b>JPEG 格式根本没有这个 alpha 通道</b>。它只存 RGB 三个值。
+       所以当你把 PNG 转成 JPEG 时，那些 alpha 信息<b>无处安放</b>——
+       必须做出选择：那些"透明"的像素，到底该显示成什么颜色？</p>
+
+    <h3>为什么"变黑"是最常见的错误结果</h3>
+    <p>如果转换程序直接丢弃 alpha 通道、不做任何处理，
+       透明区域通常都会变成<b>黑色</b>——因为在很多内部表示里，
+       完全透明像素的 RGB 值恰好是 (0,0,0)。</p>
+    <p>有些程序会保留部分中间值，于是出现<b>灰色或彩色噪点</b>——
+       那是半透明边缘（抗锯齿的过渡像素）被错误输出的结果。</p>
+
+    <h2>二、正确做法：合成（composite）到底色上</h2>
+    <p>标准解法叫<b>合成</b>：先把画布填满一个不透明颜色，
+       再把带透明的图像"盖"上去。透明区域就会自然显示出底色，边缘也能正确混合。</p>
+    <ol>
+      <li>创建画布，用目标底色（比如白色）<b>填满</b></li>
+      <li>把 PNG 绘制到上面（不能是"拷贝"，必须是"叠加"）</li>
+      <li>导出为 JPEG</li>
+    </ol>
+    <p>这样得到的结果：透明区域＝白色，半透明边缘＝正确的混合色，没有黑块也没有噪点。</p>
+
+    <h2>三、三种解决办法</h2>
+
+    <h3>办法 1：用会自动合成的转换工具（最省事）</h3>
+    <p>我们的<a href="../index.html">图片格式转换工具</a>就是这么做的：
+       它会先<b>检测</b>你的图里有没有透明区域；如果有且目标是 JPEG，
+       会提示你并显示一个<b>颜色选择器</b>（默认白色）。</p>
+    <p>你可以选白色、黑色、或者图片中的某个主色，让结果看起来更自然。</p>
+
+    <h3>办法 2：图像编辑软件里手动铺底</h3>
+    <p>Photoshop / GIMP / Affinity 里的做法：</p>
+    <ol>
+      <li>在图层最下方新建一个图层</li>
+      <li>用油漆桶填成想要的颜色（通常是白色）</li>
+      <li>然后「图层 → 拼合图像」</li>
+      <li>再导出为 JPEG</li>
+    </ol>
+    <p>适合你要精确控制的情况，但一张张手动做比较慢。</p>
+
+    <h3>办法 3：干脆别转 JPEG</h3>
+    <p>很多时候真正的需求是"体积小一点"，而不是"必须是 JPEG"。</p>
+    <p>如果目标环境支持 WebP，<b>转 WebP 是更好的选择</b>：
+       它既支持透明，体积又比 JPEG 小 25-35%。也就是说，
+       转 WebP 可以同时拿到"小体积"和"透明背景"。</p>
+    <p>只有当对方明确要求 JPEG（老系统、特定上传表单）时，才需要处理透明合成问题。</p>
+
+    <h2>四、一个常见误解</h2>
+    <p><b>"那我把 JPG 转成 PNG，是不是就能有透明背景了？"</b></p>
+    <p>不能。JPEG 里本来就没有 alpha 信息可以"恢复"。
+       转成 PNG 只是换了个支持透明的容器，但像素本身依然是不透明的。
+       想要透明背景，只能是在编辑软件里<b>抠图</b>重新生成 alpha 通道。</p>
+
+    <h2>五、检查清单</h2>
+    <ul>
+      <li>目标环境<b>真的</b>只能收 JPEG 吗？如果可以用 WebP，优先 WebP</li>
+      <li>图片有透明区域吗？（在编辑软件里看棋盘格背景）</li>
+      <li>底色选什么？白色最通用；深色背景的图选黑色可能更协调</li>
+      <li>转完之后看一眼<b>边缘</b>——半透明边缘是最容易出问题的地方</li>
+    </ul>
+
+    <h2>动手试一下</h2>
+    <p>拿一张带透明背景的 PNG 试一下我们的<a href="../index.html">格式转换工具</a>：
+       上传后会看到提示"检测到透明背景"，并出现颜色选择器。
+       换个颜色，左右对比就能直接看到效果。全程在浏览器本地完成，图片不会上传。</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">返回工具</a> ·
+      <a href="index.html">全部文章</a> ·
+      <a href="../about.html">关于我们</a> ·
+      <a href="../privacy.html">隐私政策</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter</p>
+  </footer>
+</div>
+</body>
+</html>

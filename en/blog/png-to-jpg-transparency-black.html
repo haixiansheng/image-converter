@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG to JPG: Why Transparency Turns Black (And How to Fix It) · Image Converter</title>
+<meta name="description" content="Why transparent areas turn black or noisy when converting PNG to JPEG (JPEG has no alpha channel), plus three solutions and a pre-flight checklist.">
+<link rel="canonical" href="https://haixiansheng.github.io/image-converter/en/blog/png-to-jpg-transparency-black.html" />
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>PNG to JPG: Why Transparency Turns Black (And How to Fix It)</h1>
+    <p class="sub">Why transparent areas turn black or noisy when converting PNG to JPEG </p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · ~950 words · 4 min read</p>
+
+    <p>Almost everyone hits the same surprise the first time they convert a transparent PNG to
+       JPEG: <b>the transparent areas turn black</b> (or white, grey, or noisy colour).
+       Your image isn't broken and the tool isn't "broken" — this is a structural property of
+       the format. Here's why it happens and three ways to solve it.</p>
+
+    <h2>1. The root cause: JPEG has no alpha channel</h2>
+    <p>How does transparency work? In PNG and WebP, each pixel stores not just red, green and
+       blue but also an <b>alpha value</b> (0 = fully transparent, 255 = fully opaque).</p>
+    <p><b>JPEG has no alpha channel at all.</b> It stores RGB only. So when you convert PNG to
+       JPEG, there is <b>nowhere to put</b> that alpha information — a decision must be made:
+       what colour should those "transparent" pixels actually be?</p>
+
+    <h3>Why black is the usual wrong answer</h3>
+    <p>If a converter simply drops the alpha channel without compositing, transparent regions
+       commonly come out <b>black</b> — because in many internal representations a fully
+       transparent pixel carries RGB (0,0,0).</p>
+    <p>Some tools partially handle it instead, producing <b>grey or coloured noise</b> —
+       that's the semi-transparent anti-aliased edge pixels being written incorrectly.</p>
+
+    <h2>2. The correct fix: composite onto a background</h2>
+    <p>The standard technique is <b>compositing</b>: fill the canvas with an opaque colour
+       first, then draw the transparent image on top. Transparent areas then show the
+       background, and edges blend correctly.</p>
+    <ol>
+      <li>Create the canvas and <b>fill</b> it with the target colour (white, typically)</li>
+      <li>Draw the PNG over it (an overlay, not a copy)</li>
+      <li>Export as JPEG</li>
+    </ol>
+    <p>Result: transparent areas become white, soft edges blend properly, and there is no black
+       blocking or noise.</p>
+
+    <h2>3. Three solutions</h2>
+
+    <h3>Option 1 — Use a converter that composites automatically</h3>
+    <p>Our <a href="../index.html">image converter</a> does exactly this. It first
+       <b>detects</b> whether your image has transparent pixels; if it does and the target is
+       JPEG, it tells you and shows a <b>colour picker</b> (white by default).</p>
+    <p>Pick white, black, or a colour sampled from the image itself for a more natural result.</p>
+
+    <h3>Option 2 — Composite manually in an image editor</h3>
+    <p>In Photoshop / GIMP / Affinity:</p>
+    <ol>
+      <li>Add a new layer at the very bottom</li>
+      <li>Fill it with the colour you want (usually white)</li>
+      <li>Flatten the image</li>
+      <li>Export as JPEG</li>
+    </ol>
+    <p>Good when you need precise control, but slow for more than a couple of files.</p>
+
+    <h3>Option 3 — Don't convert to JPEG at all</h3>
+    <p>Often the real requirement is "smaller file", not "specifically JPEG".</p>
+    <p>If the target supports WebP, <b>converting to WebP is the better move</b>: it keeps
+       transparency <em>and</em> is 25–35% smaller than JPEG. You get both properties at once.</p>
+    <p>You only need to wrestle with compositing when JPEG is a hard requirement (legacy
+       systems, specific upload forms).</p>
+
+    <h2>4. A common misunderstanding</h2>
+    <p><b>"So if I convert JPG to PNG, do I get transparency?"</b></p>
+    <p>No. There was never any alpha information in the JPEG to recover. Converting just
+       swaps in a container that <em>can</em> hold alpha — the pixels remain opaque. To get
+       transparency you must <b>cut out</b> the subject in an editor and generate an alpha
+       channel.</p>
+
+    <h2>5. Pre-flight checklist</h2>
+    <ul>
+      <li>Does the target <b>genuinely</b> require JPEG? If WebP works, prefer WebP</li>
+      <li>Does the image actually have transparent areas? (Look for the checkerboard)</li>
+      <li>Which background colour? White is most universal; black can look better on dark imagery</li>
+      <li>After converting, inspect the <b>edges</b> — semi-transparent edges are where problems show</li>
+    </ul>
+
+    <h2>Try it</h2>
+    <p>Take a transparent PNG and run it through our
+       <a href="../index.html">format converter</a>: you'll see a "transparent background
+       detected" notice and a colour picker appear. Change the colour and compare side by side.
+       Everything happens locally — your image is never uploaded.</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">Back to the tool</a> ·
+      <a href="index.html">All articles</a> ·
+      <a href="../about.html">About</a> ·
+      <a href="../privacy.html">Privacy Policy</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG vs JPG vs WebP: Which Format Should You Use? · Image Converter</title>
+<meta name="description" content="PNG, JPEG, WebP and BMP compared: compression, transparency, file size and compatibility, with copy-paste recommendations for eight scenarios and four common misconceptions.">
+<link rel="canonical" href="https://haixiansheng.github.io/image-converter/en/blog/png-vs-jpg-vs-webp.html" />
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>PNG vs JPG vs WebP: Which Format Should You Use?</h1>
+    <p class="sub">PNG, JPEG, WebP and BMP compared: compression, transparency, file size</p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · ~1000 words · 4 min read</p>
+
+    <p>"What format should I save this as?" is the most common hesitation when compressing or
+       converting images. Here's one table that settles it, plus copy-paste recommendations
+       per scenario.</p>
+
+    <h2>The real difference between the four formats</h2>
+    <p>Everything comes down to two axes: <b>how it compresses</b> and <b>whether it supports
+       transparency</b>.</p>
+    <table class="compare-table">
+      <thead>
+        <tr><th>Format</th><th>Compression</th><th>Alpha</th><th>Relative size</th><th>Compatibility</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>JPEG</b></td><td>Lossy</td><td>❌</td><td>Medium</td><td>⭐⭐⭐⭐⭐ universal</td></tr>
+        <tr><td><b>PNG</b></td><td>Lossless</td><td>✅</td><td>Large (5–10× JPEG for photos)</td><td>⭐⭐⭐⭐⭐ universal</td></tr>
+        <tr><td><b>WebP</b></td><td>Lossy or lossless</td><td>✅</td><td>Small (25–35% under JPEG)</td><td>⭐⭐⭐⭐ all modern browsers</td></tr>
+        <tr><td><b>BMP</b></td><td>None</td><td>❌</td><td>Huge (raw)</td><td>⭐⭐⭐ legacy only</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Why PNG is so large</h3>
+    <p>PNG is <b>lossless</b>: it rearranges data without dropping pixels, so the result is
+       identical to the original. The cost is that it barely shrinks — typically 10–30% for
+       photographic content, sometimes less.</p>
+    <p>That's why "my PNG screenshot got much smaller as a JPG" and, conversely, "my JPG grew
+       several times bigger as a PNG." The latter isn't a tool problem; it's the format.</p>
+
+    <h3>Why WebP beats JPEG on size</h3>
+    <p>WebP uses a newer codec (VP8 intra-frame), landing 25–35% smaller than JPEG at
+       <b>equivalent perceived quality</b>. It also supports alpha — something JPEG cannot do.</p>
+    <p>The only limitation is compatibility, and it's largely gone: <b>every browser released
+       since ~2020 supports it</b>. The risk is sending a WebP to someone on old desktop
+       software that can't open it.</p>
+
+    <h2>Copy-paste recommendations</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>Scenario</th><th>Use</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Website / app assets</td><td class="us">✅ WebP</td><td>Smallest payload, fastest load</td></tr>
+        <tr><td>Email or unknown recipient</td><td class="us">✅ JPEG</td><td>Opens everywhere</td></tr>
+        <tr><td>Screenshots (text, UI)</td><td class="us">✅ PNG</td><td>Crisp text edges, no loss</td></tr>
+        <tr><td>Needs transparency (icons, logos)</td><td class="us">✅ PNG or WebP</td><td>JPEG has no alpha</td></tr>
+        <tr><td>Phone photo archive</td><td class="us">✅ JPEG q95</td><td>Balances size and quality</td></tr>
+        <tr><td>Image you'll edit repeatedly</td><td class="us">✅ PNG</td><td>Lossless — no cumulative damage</td></tr>
+        <tr><td>Legacy upload system (JPG only)</td><td class="us">✅ JPEG</td><td>System constraint</td></tr>
+        <tr><td>Industrial / embedded device</td><td class="us">✅ BMP</td><td>Device only reads uncompressed</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Four common misconceptions</h2>
+
+    <h3>1. "PNG looks better than JPEG"</h3>
+    <p>Not exactly. PNG is <b>lossless</b>, so it never degrades the original. JPEG is
+       <b>lossy</b>, but above quality 90 the difference is invisible to the eye. The real gap
+       between them is <b>file size</b>, not visible quality.</p>
+
+    <h3>2. "Converting JPEG to PNG improves quality"</h3>
+    <p><b>It can't.</b> Changing the container doesn't resurrect discarded detail. The JPEG
+       artefacts carry over unchanged — the file just gets several times bigger.</p>
+    <p>The only way to actually improve quality is to <b>go back to the original export</b>,
+       or use an AI upscaler (which <em>generates</em> plausible detail rather than
+       <em>recovering</em> it).</p>
+
+    <h3>3. "JPG and JPEG are different formats"</h3>
+    <p>They're the <b>same format</b>. JPEG is the standard's name; early Windows limited
+       extensions to three characters, hence <code>.jpg</code>. Fully interchangeable.</p>
+
+    <h3>4. "If I need transparency, PNG is the only option"</h3>
+    <p>WebP supports alpha too, at much smaller sizes. <b>Whenever the target supports WebP
+       (all modern browsers do), prefer WebP for transparent images.</b></p>
+
+    <h2>The gotcha: PNG to JPEG turns transparency black</h2>
+    <p>PNG has an alpha channel; JPEG doesn't. On conversion, transparent areas must be
+       <em>composited</em> onto a background colour.</p>
+    <p>Many tools skip that step, leaving <b>black blocks or colour noise</b>. The correct
+       approach is to fill the canvas with a chosen colour first, then draw the image on top.</p>
+    <p>Our <a href="../index.html">format converter</a> detects transparent areas, tells you,
+       and lets you pick the fill colour — no black blocks.</p>
+
+    <h2>Try it</h2>
+    <p>Once you know what you want, converting is instant. Our
+       <a href="../index.html">image converter</a> runs entirely in your browser — nothing is
+       uploaded, and it handles PNG / JPG / WebP / BMP in any direction, detecting the source
+       format and suggesting a sensible target.</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">Back to the tool</a> ·
+      <a href="index.html">All articles</a> ·
+      <a href="../about.html">About</a> ·
+      <a href="../privacy.html">Privacy Policy</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -10,9 +10,15 @@ SITE = f"https://{HOST}/image-converter"
 
 URLS = [
     f"{SITE}/",
+    f"{SITE}/blog/",
+    f"{SITE}/blog/png-vs-jpg-vs-webp.html",
+    f"{SITE}/blog/png-to-jpg-transparency-black.html",
     f"{SITE}/about.html",
     f"{SITE}/privacy.html",
     f"{SITE}/en/",
+    f"{SITE}/en/blog/",
+    f"{SITE}/en/blog/png-vs-jpg-vs-webp.html",
+    f"{SITE}/en/blog/png-to-jpg-transparency-black.html",
     f"{SITE}/en/about.html",
     f"{SITE}/en/privacy.html",
 ]

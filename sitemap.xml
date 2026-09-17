@@ -10,6 +10,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://haixiansheng.github.io/image-converter/en/"/>
   </url>
   <url>
+    <loc>https://haixiansheng.github.io/image-converter/blog/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://haixiansheng.github.io/image-converter/blog/png-vs-jpg-vs-webp.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://haixiansheng.github.io/image-converter/blog/png-to-jpg-transparency-black.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://haixiansheng.github.io/image-converter/about.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -28,6 +46,24 @@
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://haixiansheng.github.io/image-converter/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://haixiansheng.github.io/image-converter/en/"/>
+  </url>
+  <url>
+    <loc>https://haixiansheng.github.io/image-converter/en/blog/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://haixiansheng.github.io/image-converter/en/blog/png-vs-jpg-vs-webp.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://haixiansheng.github.io/image-converter/en/blog/png-to-jpg-transparency-black.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://haixiansheng.github.io/image-converter/en/about.html</loc>
