@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · Image Converter</title>
+<meta name="description" content="About the free online image format converter: how it works, transparency handling, and open source info.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>About</h1>
+    <p class="sub">A free, open-source, privacy-first online tool</p>
+  </header>
+
+  <section class="panel content">
+    <h2>Why we built this</h2>
+    <p>Format conversion is a daily need: PNG screenshots that are too large, websites that
+       want WebP, legacy systems that only accept JPG, HEIC photos other people can't open.
+       But the usual online converters <b>upload your image to their servers first</b> — and
+       the images people convert are often screenshots, IDs and internal documents.</p>
+    <p>So we built this: <b>all conversion happens inside your browser</b>. Your image never
+       leaves your device. No sign-up, no fees, one image in, one image out.</p>
+
+    <h2>How it works</h2>
+    <ol>
+      <li><b>Decode</b> — the browser natively decodes the source file
+          (JPG / PNG / WebP / BMP / GIF, plus HEIC where supported).</li>
+      <li><b>Redraw</b> — the image is drawn to a Canvas. When converting to JPEG and the
+          source has transparency, the background is filled with your chosen colour first,
+          so you never get black blocks.</li>
+      <li><b>Re-encode</b> — encoded as the target format (PNG lossless / JPEG lossy /
+          WebP high-efficiency).</li>
+    </ol>
+    <p>No server-side computation is involved, so it even works offline.</p>
+
+    <h2>About transparency</h2>
+    <p>PNG and WebP support an alpha channel; JPEG does not. Converting PNG to JPEG therefore
+       requires "compositing" transparent areas onto a background.</p>
+    <p>Many tools handle this poorly, producing <b>black or noisy blocks</b>. This tool
+       detects transparency, tells you about it, and lets you choose the fill colour
+       (white by default).</p>
+
+    <h2>Privacy bonus</h2>
+    <p>Redrawing on Canvas discards the original EXIF metadata (capture time, device,
+       <b>GPS location</b>) — conversion that also protects your privacy.</p>
+
+    <h2>Open source</h2>
+    <p>Fully open source (MIT): <a href="https://github.com/haixiansheng/image-converter" target="_blank" rel="noopener">haixiansheng/image-converter</a>.</p>
+
+    <h2>Disclaimer</h2>
+    <p>Provided "as is", with no guarantee of conversion fidelity or compatibility.
+       Always check the result and keep a backup of your originals.</p>
+  </section>
+
+  <footer>
+    <nav class="foot-nav">
+      <a href="index.html">Back to the tool</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="https://haixiansheng.github.io/image-compressor/en/">Image Compressor</a> ·
+      <a href="https://haixiansheng.github.io/face-mosaic/en/">Face Mosaic Tool</a> ·
+      <a href="https://github.com/haixiansheng/image-converter" target="_blank" rel="noopener">Source code</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter</p>
+  </footer>
+
+</div>
+</body>
+</html>

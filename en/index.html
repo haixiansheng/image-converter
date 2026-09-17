@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Converter — PNG to JPG, JPG to PNG, Convert to WebP (Free, No Upload)</title>
+<meta name="description" content="Free online image format converter. PNG to JPG, JPG to PNG, convert to WebP, BMP to JPG and more. Handles transparent backgrounds properly. Runs entirely in your browser — images are never uploaded.">
+<meta name="keywords" content="image converter, png to jpg, jpg to png, convert to webp, webp to jpg, bmp to jpg, change image format, image format converter, online converter">
+<link rel="alternate" hreflang="zh-CN" href="https://haixiansheng.github.io/image-converter/" />
+<link rel="alternate" hreflang="en" href="https://haixiansheng.github.io/image-converter/en/" />
+<link rel="alternate" hreflang="x-default" href="https://haixiansheng.github.io/image-converter/en/" />
+<link rel="canonical" href="https://haixiansheng.github.io/image-converter/en/" />
+<link rel="stylesheet" href="../style.css">
+
+<!-- Structured data (SEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image Converter",
+  "url": "https://haixiansheng.github.io/image-converter/en/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "description": "Free online image format converter supporting PNG, JPG, WebP and BMP. Handles transparency properly. Runs entirely in your browser — images are never uploaded.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "PNG / JPG / WebP / BMP conversion",
+    "Smart transparency handling with custom fill colour",
+    "Adjustable quality and max dimension",
+    "100% browser-based, no upload",
+    "Full resolution output, no watermark"
+  ],
+  "isAccessibleForFree": true
+}
+</script>
+
+<!-- ============ Google AdSense ============ -->
+<!-- After approval, replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID and uncomment -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>🔄 Image Format Converter</h1>
+    <p class="sub">PNG ⇄ JPG ⇄ WebP ⇄ BMP · Smart transparency handling · Never uploaded</p>
+    <p class="lang-switch"><a href="../">中文版</a></p>
+    <div class="trust-badges">
+      <span>🔒 No upload</span>
+      <span>🚫 No server</span>
+      <span>🎨 Transparency aware</span>
+      <span>🆓 100% free</span>
+      <span>💧 No watermark</span>
+    </div>
+  </header>
+
+  <!-- ============ Ad slot 1 ============ -->
+  <div class="ad-slot ad-top"></div>
+
+  <section id="uploadPanel" class="panel">
+    <div id="dropZone" class="drop-zone">
+      <div class="drop-icon">🖼️</div>
+      <p>Click to choose an image, or drag &amp; drop one here</p>
+      <p class="hint">JPG / PNG / WebP / BMP / GIF · Ctrl+V to paste</p>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+    </div>
+  </section>
+
+  <section id="workPanel" class="panel hidden">
+    <div class="compare">
+      <figure class="cmp-item">
+        <figcaption><span id="origFmt" class="fmt-badge">?</span><b id="origSize">—</b></figcaption>
+        <div class="cmp-img"><img id="origImg" alt="Original"></div>
+        <p class="cmp-dims" id="origDims">—</p>
+      </figure>
+      <figure class="cmp-item result">
+        <figcaption><span id="resultFmt" class="fmt-badge accent">?</span><b id="resultSize">—</b></figcaption>
+        <div class="cmp-img"><img id="resultImg" alt="Converted"></div>
+        <p class="cmp-dims" id="resultDims">—</p>
+      </figure>
+    </div>
+
+    <p id="notice" class="notice"></p>
+
+    <div class="toolbar">
+      <label class="ctrl">
+        <span>Target format</span>
+        <select id="targetFmt">
+          <option value="webp">WebP</option>
+          <option value="jpeg">JPEG</option>
+          <option value="png">PNG</option>
+        </select>
+      </label>
+
+      <label class="ctrl" id="qualityRow">
+        <span>Quality <b id="qualityVal">92</b></span>
+        <input type="range" id="quality" min="1" max="100" value="92">
+      </label>
+
+      <label class="ctrl hidden" id="bgRow">
+        <span>Fill transparent areas</span>
+        <input type="color" id="bgColor" value="#ffffff">
+      </label>
+
+      <label class="ctrl">
+        <span>Max dimension (px)</span>
+        <input type="number" id="maxDim" min="0" max="20000" step="100" value="0" placeholder="0 = keep original">
+      </label>
+    </div>
+
+    <p id="fmtHint" class="hint-line"></p>
+    <p id="status" class="status"></p>
+
+    <div class="actions">
+      <a id="downloadBtn" class="btn primary" download="converted.webp">⬇ Download image</a>
+      <button id="resetBtn" class="btn">Choose another image</button>
+    </div>
+  </section>
+
+  <!-- ============ Ad slot 2 ============ -->
+  <div class="ad-slot ad-mid"></div>
+
+  <!-- ============ Selling points ============ -->
+  <h2 class="section-title">Why choose this tool</h2>
+  <p class="section-sub">The only image converter that literally <em>cannot</em> store your files</p>
+
+  <div class="features">
+    <div class="feature hero">
+      <div class="f-icon">🔒</div>
+      <h3>No upload, no server</h3>
+      <p>There is <b>no backend server at all</b>. Conversion runs in your browser, your images
+         never leave your device, and we are <b>technically unable</b> to store them.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">🎨</div>
+      <h3>Transparency handled properly</h3>
+      <p>Converting PNG to JPEG fills transparent areas with a colour you choose (white by
+         default) instead of leaving black blocks or artefacts. WebP and PNG keep alpha intact.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">🔄</div>
+      <h3>Any direction</h3>
+      <p>JPG ⇄ PNG ⇄ WebP ⇄ BMP in every combination. The source format is detected
+         automatically and a sensible target is suggested.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">1️⃣</div>
+      <h3>One in, one out</h3>
+      <p>No ZIP archives, no unzipping. Upload one, download one — with the correct file
+         extension applied automatically.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">⚡</div>
+      <h3>Instant</h3>
+      <p>Local Canvas encoding: no queue, no upload. Changing the format or quality
+         re-converts immediately.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">🕵️</div>
+      <h3>Strips location metadata</h3>
+      <p>Redrawing on Canvas drops the original EXIF data, including GPS coordinates —
+         conversion that also protects your privacy.</p>
+    </div>
+  </div>
+
+  <section class="panel content">
+    <h2 class="section-title" style="margin-top:0">Which format should you pick?</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>Format</th><th>Transparency</th><th>Size</th><th>Compatibility</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>JPEG</b></td><td>❌</td><td>Medium</td><td>⭐⭐⭐⭐⭐ universal</td>
+            <td>Photos, email, legacy upload systems</td></tr>
+        <tr><td><b>PNG</b></td><td>✅</td><td>Large (lossless)</td><td>⭐⭐⭐⭐⭐ universal</td>
+            <td>Screenshots, icons, anything needing alpha</td></tr>
+        <tr><td><b>WebP</b></td><td>✅</td><td>Small (25–35% under JPEG)</td><td>⭐⭐⭐⭐ modern browsers</td>
+            <td>Web assets, app resources</td></tr>
+        <tr><td><b>BMP</b></td><td>❌</td><td>Huge (uncompressed)</td><td>⭐⭐⭐ legacy only</td>
+            <td>Specific industrial / embedded systems</td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">
+      💡 <b>Not sure?</b> Web or app assets → <b>WebP</b>. Sending to a person or an unknown
+      viewer → <b>JPEG</b> is safest. Need a transparent background → <b>PNG</b> or <b>WebP</b>.
+    </p>
+  </section>
+
+  <section class="panel content">
+    <h2 class="section-title" style="margin-top:0">How it compares</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>&nbsp;</th><th>Typical online tools</th><th>This tool</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uploads your images?</td><td>❌ Yes</td><td class="us">✅ Never</td></tr>
+        <tr><td>Server could store your images?</td><td>⚠️ Technically yes</td><td class="us">✅ No server at all</td></tr>
+        <tr><td>Transparency handling</td><td>Often black/white blobs</td><td class="us">✅ Custom fill colour</td></tr>
+        <tr><td>Account required?</td><td>Often</td><td class="us">✅ None</td></tr>
+        <tr><td>Watermark?</td><td>Common</td><td class="us">✅ None</td></tr>
+        <tr><td>Forced re-compression?</td><td>Usually</td><td class="us">✅ Quality adjustable (92 default)</td></tr>
+        <tr><td>Data breach risk</td><td>Depends on their servers</td><td class="us">✅ Zero (no data sent)</td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">
+      💡 Verify it yourself: press F12 → Network tab → convert an image.
+      You'll see <b>no image data is ever sent</b>.
+    </p>
+  </section>
+
+  <!-- ============ Content ============ -->
+  <section class="panel content">
+    <h2>📖 How to use</h2>
+
+    <h3>Steps</h3>
+    <ol>
+      <li><b>Upload an image</b> — click, drag &amp; drop, or paste with Ctrl+V.</li>
+      <li><b>Pick a target format</b> — WebP (smallest), JPEG (most compatible),
+          PNG (lossless + transparency). The source format is detected and a sensible
+          target is pre-selected.</li>
+      <li><b>Tune it</b> — quality (applies to JPEG/WebP; PNG ignores it) and max dimension.</li>
+      <li><b>Handle transparency</b> — if the source has transparent areas and the target is
+          JPEG, a fill-colour picker appears (white by default).</li>
+      <li><b>Download</b> — click "Download image"; the correct extension is applied
+          automatically.</li>
+    </ol>
+
+    <h3>Common conversions</h3>
+    <table class="compare-table">
+      <thead><tr><th>Goal</th><th>Recommended settings</th></tr></thead>
+      <tbody>
+        <tr><td>PNG → JPG (smaller screenshots, JPG-only upload forms)</td><td>JPEG, quality 90–95, fill white</td></tr>
+        <tr><td>JPG → PNG (lossless container)</td><td>PNG (note the file gets bigger)</td></tr>
+        <tr><td>Convert to WebP for a website</td><td>WebP, quality 78–85</td></tr>
+        <tr><td>WebP → JPG (recipient can't open WebP)</td><td>JPEG, quality 92</td></tr>
+        <tr><td>BMP → JPG (can shrink by ~95%)</td><td>JPEG, quality 90</td></tr>
+        <tr><td>App / favicon assets</td><td>PNG or WebP, set max dimension to the display size</td></tr>
+        <tr><td>Image is simply too large</td><td>Any format + set max dimension</td></tr>
+      </tbody>
+    </table>
+
+    <h3>FAQ</h3>
+    <p><b>Q: Are my images uploaded to a server?</b><br>
+       A: No. Everything runs in your browser. Images never leave your device, and it works offline.</p>
+    <p><b>Q: My PNG → JPEG transparency turned black elsewhere. What happened?</b><br>
+       A: That tool didn't composite the alpha channel. This one detects transparency,
+          tells you, and fills it with a colour you pick (white by default).</p>
+    <p><b>Q: Can I make a JPEG transparent by converting it to PNG?</b><br>
+       A: No. JPEG stores no transparency data, so converting just changes the container —
+          the opaque pixels stay opaque. Real cut-outs need image editing.</p>
+    <p><b>Q: Does converting lose quality?</b><br>
+       A: Depends on the pair:
+       <br>· To PNG, or WebP at quality 100 → practically lossless
+       <br>· To JPEG → lossy, but above quality 92 it's visually imperceptible
+       <br>· JPEG → PNG → won't improve anything; existing compression artefacts carry over</p>
+    <p><b>Q: Do you support HEIC (iPhone photos)?</b><br>
+       A: It depends on your browser. Safari can decode HEIC; Chrome and Edge generally
+          cannot. If the preview fails, your browser lacks the codec for that input format.</p>
+    <p><b>Q: Is EXIF data preserved?</b><br>
+       A: No. Redrawing on Canvas drops EXIF metadata, which conveniently also
+       <b>removes location privacy data</b> from your photos.</p>
+
+    <h3>Supported browsers</h3>
+    <p>Recent Chrome, Edge, Firefox and Safari. Chrome or Edge are recommended
+       (best WebP encoding support).</p>
+  </section>
+
+  <!-- ============ Ad slot 3 ============ -->
+  <div class="ad-slot ad-bottom"></div>
+
+  <footer>
+    <p>Runs entirely in your browser · Your image never leaves your device</p>
+    <nav class="foot-nav">
+      <a href="about.html">About</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="https://haixiansheng.github.io/image-compressor/en/">Image Compressor</a> ·
+      <a href="https://haixiansheng.github.io/face-mosaic/en/">Face Mosaic Tool</a> ·
+      <a href="https://github.com/haixiansheng/image-converter" target="_blank" rel="noopener">Source code</a>
+    </nav>
+    <p class="copy">© 2026 Image Converter · For lawful use only.</p>
+  </footer>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>
