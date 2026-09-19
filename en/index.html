@@ -56,6 +56,62 @@
 <meta name="twitter:title" content="Image Converter — PNG to JPG, JPG to PNG, Convert to WebP (Free, No Upload)">
 <meta name="twitter:description" content="Free online image format converter. PNG to JPG, JPG to PNG, convert to WebP, BMP to JPG and more. Handles transparent backgrounds properly. Runs entirely in your browser — images are never uploaded.">
 <meta name="twitter:image" content="https://haixiansheng.github.io/image-converter/og-en.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs in your browser. Images never leave your device, and it works offline."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My PNG → JPEG transparency turned black elsewhere. What happened?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That tool didn't composite the alpha channel. This one detects transparency, tells you, and fills it with a colour you pick (white by default)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I make a JPEG transparent by converting it to PNG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. JPEG stores no transparency data, so converting just changes the container — the opaque pixels stay opaque. Real cut-outs need image editing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does converting lose quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depends on the pair: · To PNG, or WebP at quality 100 → practically lossless · To JPEG → lossy, but above quality 92 it's visually imperceptible · JPEG → PNG → won't improve anything; existing compression artefacts carry over"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you support HEIC (iPhone photos)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your browser. Safari can decode HEIC; Chrome and Edge generally cannot. If the preview fails, your browser lacks the codec for that input format."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is EXIF data preserved?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Redrawing on Canvas drops EXIF metadata, which conveniently also removes location privacy data from your photos."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="app">
